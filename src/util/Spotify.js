@@ -1,4 +1,3 @@
-import React from 'react';
 const clientId = '6f0f305fca8b4660b99c8184aead6cb5';
 const redirectUri ='http://localhost:3000/';
 
@@ -28,9 +27,7 @@ const Spotify = {
                            redirect_uri=${redirectUri}`;
                 
                 windows.location = accessUrl;
-            }
-
-            
+            }  
 
     },
 
@@ -39,8 +36,8 @@ const Spotify = {
 
        return fetch (`https://api.spotify.com/v1/search?type=track&q=${term}`,
         {
-            headers: {Authorization: `Bearer ${accessToken}`}
-          }) //sends request
+            headers: { Authorization: `Bearer ${accessToken}` } //sends request
+          }) 
 
 	.then(response => { //converts response object to JSON
   		if (response.ok) {
@@ -50,7 +47,17 @@ const Spotify = {
 		}, 
 		networkError => console.log(networkError.message)) // handles errors
 	.then(jsonResponse => { // handles success
-		return jsonResponse;}) // code to excute with jsonResponse
+        if (!jsonResponse.tracks) { // code to excute with jsonResponse
+             return []
+          }
+          jsonResponse.tracks.item.map(track =>({
+              id: track.id,
+              name: track.name,
+              artist: track.artists[0].name,
+              album: track.album.name,
+              uri: track.uri,
+          }))
+        }) 
     }
   }
 
