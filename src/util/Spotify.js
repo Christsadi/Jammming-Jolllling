@@ -32,9 +32,25 @@ const Spotify = {
 
             
 
+    },
 
+    search(term){
+        const accessToken = Spotify.getAccessToken();
 
+       return fetch (`https://api.spotify.com/v1/search?type=track&q=${term}`,
+        {
+            headers: {Authorization: `Bearer ${accessToken}`}
+          }) //sends request
 
+	.then(response => { //converts response object to JSON
+  		if (response.ok) {
+    			return response.json();
+  		} 
+  		throw new Error('Request failed!'); //handles errors
+		}, 
+		networkError => console.log(networkError.message)) // handles errors
+	.then(jsonResponse => { // handles success
+		return jsonResponse;}) // code to excute with jsonResponse
     }
   }
 
