@@ -32,11 +32,9 @@ class App extends React.Component {
     let tracks = this.state.playlistTracks;
     if(tracks.find(savedTrack => savedTrack.id === track.id)){
       return;
-    } else {
+    } 
       tracks.push(track);
-    }
-    
-    this.setState({playlistTracks: tracks});
+      this.setState({playlistTracks: tracks});
   }
   
   updatePlaylistName(name){
