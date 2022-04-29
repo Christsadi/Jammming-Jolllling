@@ -1,5 +1,5 @@
 const clientId = '6f0f305fca8b4660b99c8184aead6cb5';
-const redirectUri ='http://localhost:3000/';
+const redirectUri ='http://localhost:3000';
 
 let accessToken;
 
@@ -48,7 +48,7 @@ const Spotify = {
             if (!jsonResponse.tracks) { // code to excute with jsonResponse
                 return []
           }
-          jsonResponse.tracks.item.map(track =>({
+          return jsonResponse.tracks.items.map(track =>({
               id: track.id,
               name: track.name,
               artist: track.artists[0].name,
@@ -81,7 +81,7 @@ const Spotify = {
 	                            {
 	                                headers: headers,
                                     method: 'POST',
-	                                body: JSON.stringify({uris: trackUris})
+	                                body: JSON.stringify({name: name})
                                  }) //sends request
 	        .then(response => { //converts response object to JSON
   		        if (response.ok) {
@@ -96,7 +96,7 @@ const Spotify = {
 	                            {
 	                                headers: headers,
                                     method: 'POST',
-	                                body: JSON.stringify({name: name})
+	                                body: JSON.stringify({uris: trackUris})
                                  }) //sends request
         
         })
