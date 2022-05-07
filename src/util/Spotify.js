@@ -1,5 +1,5 @@
-const clientId = '6f0f305fca8b4660b99c8184aead6cb5';
-const redirectUri ='http://localhost:3000';
+const clientId = 'df0a9ec880394c6d966f31229cbda1d0';
+const redirectUri ='http://localhost:3000/';
 
 let accessToken;
 
@@ -32,26 +32,19 @@ const Spotify = {
     search(term){
         const accessToken = Spotify.getAccessToken();
 
-       return fetch (`https://api.spotify.com/v1/search?type=track&q=${term}`,
+       return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,
         {
             headers: { Authorization: `Bearer ${accessToken}` } //sends request
-        }) 
-
-	    .then(response => { //converts response object to JSON
-  		    if (response.ok) {
+        }).then(response => { //converts response object to JSON
     		    return response.json();
-  		} 
-  		throw new Error('Request failed!'); //handles errors
-		}, 
-		networkError => console.log(networkError.message)) // handles errors
-	    .then(jsonResponse => { // handles success
+  		}).then(jsonResponse => { // handles success
             if (!jsonResponse.tracks) { // code to excute with jsonResponse
                 return []
           }
           return jsonResponse.tracks.items.map(track =>({
               id: track.id,
               name: track.name,
-              artist: track.artists[0].name,
+              artists: track.artists[0].name,
               album: track.album.name,
               uri: track.uri
           }))
@@ -69,13 +62,8 @@ const Spotify = {
 
         return fetch (`https://api.spotify.com/v1/me`, {headers: headers}) //sends request
 	    .then(response => { //converts response object to JSON
-  		if (response.ok) {
-    			return response.json();
-  		} 
-  		throw new Error('Request failed!'); //handles errors
-		}, 
-		networkError => console.log(networkError.message)) // handles errors
-	    .then(jsonResponse => { // handles success
+            return response.json(); 
+		}).then(jsonResponse => { // handles success
 		        userId = jsonResponse.id;
                 return fetch (`https://api.spotify.com/v1/users/${userId}/playlists`,
 	                            {
@@ -84,12 +72,8 @@ const Spotify = {
 	                                body: JSON.stringify({name: name})
                                  }) //sends request
 	        .then(response => { //converts response object to JSON
-  		        if (response.ok) {
     			return response.json();
-  		    } 
-  		    throw new Error('Request failed!'); //handles errors
-		    }, 
-		    networkError => console.log(networkError.message)) // handles errors
+  		    }) 
 	        .then(jsonResponse => { // handles success
 		     const playlistId = jsonResponse.id;
              return fetch (`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`,
