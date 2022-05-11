@@ -1,7 +1,7 @@
 import apiKey from "./apiKey";
 
 const clientId = apiKey;
-const redirectUri ='http://localhost:3000/';
+const redirectUri ='http://jol.surge.sh';
 
 let accessToken;
 
