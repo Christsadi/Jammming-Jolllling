@@ -1,4 +1,4 @@
-const clientId = 'df0a9ec880394c6d966f31229cbda1d0';
+const clientId = process.env.API_KEY;
 const redirectUri ='http://jol.surge.sh';
 
 let accessToken;
