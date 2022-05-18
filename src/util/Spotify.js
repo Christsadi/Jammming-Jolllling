@@ -1,5 +1,5 @@
-const clientId = process.env.API_KEY;
-const redirectUri ='http://jol.surge.sh';
+const clientId = process.env.REACT_APP_SPOTIFY_API;
+const redirectUri ='localhost:3000';
 
 let accessToken;
 
