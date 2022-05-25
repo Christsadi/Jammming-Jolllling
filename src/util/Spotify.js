@@ -1,5 +1,7 @@
-const clientId = process.env.REACT_APP_SPOTIFY_API;
-const redirectUri ='localhost:3000';
+import apiKey from "./apiKey";
+// const clientId = process.env.REACT_APP_SPOTIFY_API; For some reason when i try with it this way it does not work
+const clientId = apiKey;
+const redirectUri ='http://jol.surge.sh';
 
 let accessToken;
 
@@ -14,6 +16,7 @@ const Spotify = {
 
             if(accessTokenMatch && expirationTimeMatch){
                 accessToken = accessTokenMatch[1];
+                accessToken = accessToken.replace("=", ""); // troubleshooting
                 const expiresIn = Number(expirationTimeMatch[1]);
                 
                 //this code, wipes the access token and URL parameters.
