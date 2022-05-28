@@ -1,7 +1,7 @@
 import apiKey from "./apiKey";
 // const clientId = process.env.REACT_APP_SPOTIFY_API; For some reason when i try with it this way it does not work
 const clientId = apiKey;
-const redirectUri ='http://localhost:3000/';
+const redirectUri ='https://christsadi.github.io/Jammming-Jolllling/';
 
 let accessToken;
 let userId;
