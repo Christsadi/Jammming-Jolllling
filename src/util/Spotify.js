@@ -1,9 +1,10 @@
 import apiKey from "./apiKey";
 // const clientId = process.env.REACT_APP_SPOTIFY_API; For some reason when i try with it this way it does not work
 const clientId = apiKey;
-const redirectUri ='http://jol.surge.sh';
+const redirectUri ='http://localhost:3000/';
 
 let accessToken;
+let userId;
 
 const Spotify = {
     getAccessToken(){
@@ -58,16 +59,12 @@ const Spotify = {
         if (!name || !trackUris.length){
             return;
         }
-
         const accessToken = Spotify.getAccessToken();
-        const headers = { Authorization: `Bearer ${accessToken}` };
-        let userId;
+        const headers = { Authorization: `Bearer ${accessToken}` };    
 
-        return fetch (`https://api.spotify.com/v1/me`, {headers: headers}) //sends request
-	    .then(response => { //converts response object to JSON
-            return response.json(); 
-		}).then(jsonResponse => { // handles success
-		        userId = jsonResponse.id;
+        return Promise.resolve(Spotify.getUserId()).then((response) => {
+            userId = response;
+
                 return fetch (`https://api.spotify.com/v1/users/${userId}/playlists`,
 	                            {
 	                                headers: headers,
@@ -88,7 +85,23 @@ const Spotify = {
         
         })
         })
-    } 
+    },
+
+    getUserId(){
+        const accessToken = Spotify.getAccessToken();
+        const headers = { Authorization: `Bearer ${accessToken}` };
+
+        if (userId) {
+            return userId;
+          }
+
+          return fetch('https://api.spotify.com/v1/me', {headers: headers})
+            .then((response) => response.json())
+            .then((jsonResponse) => {
+              userId = jsonResponse.id;
+              return userId;
+            })        
+    }
 
 }
 
