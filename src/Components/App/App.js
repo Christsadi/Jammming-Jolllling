@@ -75,6 +75,7 @@ class App extends React.Component {
                       onNameChange={this.updatePlaylistName}
                       onSave={this.savePlaylist}/>
            </div>
+           
         </div>
       </div>
     )

@@ -1,7 +1,7 @@
 import apiKey from "./apiKey";
 // const clientId = process.env.REACT_APP_SPOTIFY_API; For some reason when i try with it this way it does not work
 const clientId = apiKey;
-const redirectUri ='https://christsadi.github.io/Jammming-Jolllling/';
+const redirectUri ='http://localhost:3000/Jammming-Jolllling';
 
 let accessToken;
 let userId;
@@ -62,7 +62,7 @@ const Spotify = {
         const accessToken = Spotify.getAccessToken();
         const headers = { Authorization: `Bearer ${accessToken}` };    
 
-        return Promise.resolve(Spotify.getUserId()).then((response) => {
+        return Promise.resolve(Spotify.getCurrentUserId()).then((response) => {
             userId = response;
 
                 return fetch (`https://api.spotify.com/v1/users/${userId}/playlists`,
@@ -87,7 +87,7 @@ const Spotify = {
         })
     },
 
-    getUserId(){
+    getCurrentUserId(){
         const accessToken = Spotify.getAccessToken();
         const headers = { Authorization: `Bearer ${accessToken}` };
 
@@ -101,7 +101,34 @@ const Spotify = {
               userId = jsonResponse.id;
               return userId;
             })        
-    }
+    },
+
+    getUserPlaylists(){
+        const accessToken = Spotify.getAccessToken();
+        const headers = { Authorization: `Bearer ${accessToken}` };
+
+        return Promise.resolve(Spotify.getCurrentUserId()).then((response) => {
+            userId = response;
+
+          return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, 
+                            {
+                                headers: headers,
+                                method: 'GET',
+                            })
+            .then((response) => response.json())
+            .then((jsonResponse) => {
+                const userPlaylistId = jsonResponse.playlist;
+                if (!userPlaylistId) { // code to excute with jsonResponse
+                    return []
+              }
+              return userPlaylistId.items.map(playlist =>({
+                playlistId: playlist.id,
+                playlistName: playlist.name,
+            
+            }))   
+        })
+        })
+    },
 
 }
 
