@@ -1,3 +1,22 @@
-.PlaylistList {
-  width: 100%;
+.playlistList {
+  margin: auto;
+  margin-top: 2rem;
+  width: 50%;
+  height: 250px;
+  overflow-y: scroll;
+  padding: 1rem;
+  background-color: rgba(2, 58, 34, 0.7);
+  box-shadow: 0 4px 2px 2px #000000a1;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+@media only screen and (max-width: 1020px) {
+  .playlistList {
+    width: 90%;
+    margin-bottom: 2rem;
+  }
 }

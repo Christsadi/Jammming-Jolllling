@@ -117,11 +117,11 @@ const Spotify = {
                             })
             .then((response) => response.json())
             .then((jsonResponse) => {
-                const userPlaylistId = jsonResponse.playlist;
-                if (!userPlaylistId) { // code to excute with jsonResponse
-                    return []
+                const playlistJson = jsonResponse.items
+                if (!playlistJson) { // code to excute with jsonResponse
+                    return [];
               }
-              return userPlaylistId.items.map(playlist =>({
+              return playlistJson.map(playlist =>({
                 playlistId: playlist.id,
                 playlistName: playlist.name,
             
