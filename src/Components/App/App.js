@@ -14,12 +14,23 @@ class App extends React.Component {
       playlistName : 'My Playlist',
       playlistTracks : [],
       playlistList : [],
+      PlaistId: [],
                         };
       this.addTrack = this.addTrack.bind(this);
       this.removeTrack = this.removeTrack.bind(this);
       this.updatePlaylistName = this.updatePlaylistName.bind(this);
       this.savePlaylist = this.savePlaylist.bind(this);
       this.search = this.search.bind(this);
+      this.selectPlaylist= this.selectPlaylist.bind(this);
+  }
+
+  selectPlaylist(id) {
+    Spotify.getPlaylist(id).then(listId => {
+      this.setState({
+                      playlistName: listId.name,
+                      playlistTracks: listId.tracks
+                    });
+    });
   }
 
   componentWillMount() {
@@ -83,7 +94,7 @@ class App extends React.Component {
                       onNameChange={this.updatePlaylistName}
                       onSave={this.savePlaylist}/>
            </div>
-           <PlaylistList playlistList={this.state.playlistList}/> 
+           <PlaylistList selectPlaylist={this.selectPlaylist} playlistList={this.state.playlistList}/> 
            
         </div>
       </div>

@@ -12,6 +12,7 @@ class playlistList extends React.Component {
         { 
         this.props.playlistList.map(playlist => {
               return <PlaylistListItem 
+              selectList={this.props.selectPlaylist}
               listName={playlist.playlistName} 
                 key={playlist.playlistId} />
             }) 

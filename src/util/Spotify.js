@@ -55,8 +55,8 @@ const Spotify = {
         }) 
     },
     
-    savePlaylist(name, trackUris) {
-        if (!name || !trackUris.length){
+    savePlaylist(name, trackUris, playId) {
+        if (!name || !trackUris.length || !playId){
             return;
         }
         const accessToken = Spotify.getAccessToken();
@@ -65,13 +65,20 @@ const Spotify = {
         return Promise.resolve(Spotify.getCurrentUserId()).then((response) => {
             userId = response;
 
-                return fetch (`https://api.spotify.com/v1/users/${userId}/playlists`,
+            if (!playId){
+                return fetch (`https://api.spotify.com/v1/users/{user_id}/playlists/${playId}`,
+                {
+                    headers: headers,
+                    method: 'POST',
+                    body: JSON.stringify({name: name})
+                 })
+            }   return fetch (`https://api.spotify.com/v1/users/${userId}/playlists`,
 	                            {
 	                                headers: headers,
                                     method: 'POST',
 	                                body: JSON.stringify({name: name})
                                  }) //sends request
-	        .then(response => { //converts response object to JSON
+            .then(response => { //converts response object to JSON
     			return response.json();
   		    }) 
 	        .then(jsonResponse => { // handles success
@@ -85,6 +92,7 @@ const Spotify = {
         
         })
         })
+
     },
 
     getCurrentUserId(){
@@ -129,6 +137,42 @@ const Spotify = {
         })
         })
     },
+
+    getPlaylist(id){
+        
+        if (!id){
+            return;
+        }
+
+        const accessToken = Spotify.getAccessToken();
+        const headers = { Authorization: `Bearer ${accessToken}` };    
+
+        return Promise.resolve(Spotify.getCurrentUserId()).then((response) => {
+            userId = response;
+
+                return fetch (`https://api.spotify.com/v1/users/${userId}/playlists/${id}/tracks`,
+	                            {
+	                                headers: headers,
+                                    method: 'GET',
+                                 }) //sends request
+	        .then(response => { //converts response object to JSON
+    			return response.json();
+  		    }) 
+	        .then((jsonResponse) => {
+                const trackJson = jsonResponse.tracks
+                if (!trackJson) { // code to excute with jsonResponse
+                    return [];
+              }
+              return trackJson.map(track =>({
+                id: track.id,
+                name: track.name,
+                artists: track.artists[0].name,
+                album: track.album.name,
+                uri: track.uri
+            }))   
+        })
+        })
+    }
 
 }
 
