@@ -14,7 +14,7 @@ class App extends React.Component {
       playlistName : 'My Playlist',
       playlistTracks : [],
       playlistList : [],
-      PlaistId: [],
+      PlaylistId: null,
                         };
       this.addTrack = this.addTrack.bind(this);
       this.removeTrack = this.removeTrack.bind(this);
@@ -28,7 +28,8 @@ class App extends React.Component {
     Spotify.getPlaylist(id).then(listId => {
       this.setState({
                       playlistName: listId.name,
-                      playlistTracks: listId.tracks
+                      playlistTracks: listId.tracks,
+                      playlistId:listId.id
                     });
     });
   }
@@ -63,7 +64,7 @@ class App extends React.Component {
   savePlaylist(){
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     
-    Spotify.savePlaylist(this.state.playlistName,trackUris)
+    Spotify.savePlaylist(this.state.playlistName,trackUris,this.state.playlistId)
     .then( () => {this.setState({playlistName: 'New Playlist',
                   playlistTracks: []
       })
