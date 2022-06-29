@@ -1,7 +1,7 @@
-import apiKey from "./apiKey";
+import tools from "./tools";
 // const clientId = process.env.REACT_APP_SPOTIFY_API; For some reason when i try with it this way it does not work
-const clientId = apiKey;
-const redirectUri ='https://christsadi.github.io/Jammming-Jolllling/';
+const clientId = tools.apiKey;
+const redirectUri = tools.uri;
 
 let accessToken;
 let userId;
@@ -27,7 +27,6 @@ const Spotify = {
 
             } else {
                 const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-                
                 window.location = accessUrl;
             }  
 
@@ -65,8 +64,8 @@ const Spotify = {
         return Promise.resolve(Spotify.getCurrentUserId()).then((response) => {
             userId = response;
 
-            if (!playId){
-                return fetch (`https://api.spotify.com/v1/users/{user_id}/playlists/${playId}`,
+            if (playId){
+                return fetch (`https://api.spotify.com/v1/users/${userId}/playlists/${playId}`,
                 {
                     headers: headers,
                     method: 'POST',

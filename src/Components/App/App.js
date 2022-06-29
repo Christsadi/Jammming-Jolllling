@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       searchResults : [],
-      playlistName : 'My Playlist',
+      playlistName : 'New Playlist',
       playlistTracks : [],
       playlistList : [],
       PlaylistId: null,
@@ -72,10 +72,10 @@ class App extends React.Component {
 
   }
 
-  search(term){
-    Spotify.search(term).then(searchResults => {
-      this.setState({searchResults: searchResults})
-    })
+  search(term) {
+    Spotify.search(term).then((searchResults) => {
+      this.setState({ searchResults: searchResults });
+    });
   }
 
   render(){
