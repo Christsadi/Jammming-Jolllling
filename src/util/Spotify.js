@@ -13,12 +13,12 @@ const Spotify = {
         } 
             // check for acces token match
             const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/)
-            const expirationTimeMatch = window.location.href.match(/expires_in=([^&]*)/)
+            const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/)
 
-            if(accessTokenMatch && expirationTimeMatch){
+            if(accessTokenMatch && expiresInMatch){
                 accessToken = accessTokenMatch[1];
                 accessToken = accessToken.replace("=", ""); // troubleshooting
-                const expiresIn = Number(expirationTimeMatch[1]);
+                const expiresIn = Number(expiresInMatch[1]);
                 
                 //this code, wipes the access token and URL parameters.
                 window.setTimeout(() => accessToken = '', expiresIn * 1000);
