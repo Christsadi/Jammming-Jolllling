@@ -5,14 +5,14 @@
 /.pnp
 .pnp.js
 
-#apiKey
-/src/util/apiKey.js
+#tools
+/src/util/tools.js
 
 # testing
 /coverage
 
 # production
-/build
+
 
 # misc
 .DS_Store
