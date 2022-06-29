@@ -54,9 +54,13 @@ This project is open source. Personal logos and images should not be used withou
 - Google Chrome (browser)
 - Git and GitHub
 
-## Screenshots
+## Screenshots Part 1
 
-![Example screenshot homepage](./public/screenshot-Part-1-of-Project.jpg)(./public/screenshot-Part-2-of-Project.jpg)
+![Example screenshot homepage](./public/screenshot-Part-1-of-Project.jpg)
+
+## Screenshots Part 2
+
+![Example screenshot homepage](./public/screenshot-Part-2-of-Project.jpg)
 
 ## Setup
 
