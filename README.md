@@ -2,11 +2,13 @@
 
 Part 1 of the Project
 
-In this project, I built a React web application called Jammming. I will use my knowledge of React components, passing state, and requests with the Spotify API to build a website that allows users to search the Spotify library, create a custom playlist, then save it to their Spotify account. I managed to do this, but struggled to get other users to be able to use the app. For some reason it only works when i log in and i have not found the bug yet.
+In this project, I built a React web application called Jammming. I will use my knowledge of React components, passing state, and requests with the Spotify API to build a website that allows users to search the Spotify library, create a custom playlist, then save it to their Spotify account. I managed to do this.
+
+Due to security changes in how the Spotify API handles authentication for non-published applications (and Jammming does not fit the application criteria for an extension/removal of these restrictions), only the user who has registered the application is able to log into the OAUTH screen to therefore log into their Jammming app, and any other user must be manually added as an authorised tested from the Spotify Developer Dashboard panel for that app before they can.
 
 Part 2 of the Project
 
-To give users the ability to update all of their Spotify playlists and save them to Spotify. I really struggled doing this but manage to get quiet far. I did not complete this part since I first need to fix the bug in part 1.
+To give users the ability to update all of their Spotify playlists and save them to Spotify. I really struggled doing this but manage to get quiet far. I did not complete this and will return to fix the bugs when i finish in due time.
 
 ## Table of Contents
 
