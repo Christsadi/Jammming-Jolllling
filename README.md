@@ -8,7 +8,7 @@ Due to security changes in how the Spotify API handles authentication for non-pu
 
 Part 2 of the Project
 
-To give users the ability to update all of their Spotify playlists and save them to Spotify. I really struggled doing this but manage to get quiet far. I did not complete this and will return to fix the bugs when i finish in due time.
+To give users the ability to update all of their Spotify playlists and save them to Spotify. I really struggled doing this but manage to get quiet far. I did not complete this and will return to fix the bugs in due time.
 
 ## Table of Contents
 
